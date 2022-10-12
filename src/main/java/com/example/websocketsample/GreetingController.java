@@ -19,8 +19,8 @@ public class GreetingController {
     public void greeting(@DestinationVariable Long id, HelloMessage message) throws Exception {
 //        Thread.sleep(1000); // simulated delay
         System.out.println("id = " + id);
-        this.template.convertAndSend("/topic/greeting/" + id,
-                new Greeting("Hello, " + HtmlUtils.htmlEscape(message.getName()) + "!"));
+        Greeting payload = new Greeting("Hello, " + HtmlUtils.htmlEscape(message.getName()) + "!");
+        this.template.convertAndSend("/topic/greetings/" + id, payload);
     }
 
 }
